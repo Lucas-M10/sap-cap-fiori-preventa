@@ -1,0 +1,68 @@
+{
+  "cds": {
+    "requires": {
+      "db": {
+        "kind": "sqlite",
+        "credentials": {
+          "url": "sqlite.db"
+        }
+      },
+      "API_BUSINESS_PARTNER": {
+        "kind": "odata-v2",
+        "model": "srv/external/API_BUSINESS_PARTNER",
+        "[production]": {
+          "credentials": {
+            "destination": "apihub_sandbox",
+            "path": "/s4hanacloud/sap/opu/odata/sap/API_BUSINESS_PARTNER"
+          }
+        },
+        "[development]": {
+          "credentials": {
+            "url": "https://sandbox.api.sap.com/s4hanacloud/sap/opu/odata/sap/API_BUSINESS_PARTNER",
+            "headers": {
+              "APIKey": "{env:SAP_APIKEY}"
+            }
+          }
+        }
+      },
+      "API_PRODUCT_SRV": {
+        "kind": "odata-v2",
+        "model": "srv/external/API_PRODUCT_SRV",
+        "[production]": {
+          "credentials": {
+            "destination": "apihub_sandbox",
+            "path": "/s4hanacloud/sap/opu/odata/sap/API_PRODUCT_SRV"
+          }
+        },
+        "[development]": {
+          "credentials": {
+            "url": "https://sandbox.api.sap.com/s4hanacloud/sap/opu/odata/sap/API_PRODUCT_SRV",
+            "headers": {
+              "APIKey": "{env:SAP_APIKEY}"
+            }
+          }
+        }
+      }
+    }
+  },
+  "dependencies": {
+    "@cap-js/sqlite": "^3.1.1",
+    "@sap-cloud-sdk/connectivity": "^4",
+    "@sap-cloud-sdk/http-client": "^4",
+    "@sap-cloud-sdk/resilience": "^4",
+    "@sap/cds": "^10.1.1"
+  },
+  "workspaces": [
+    "app/*"
+  ],
+  "devDependencies": {
+    "@sap/cds-dk": "^10.1.0",
+    "cds-plugin-ui5": "^0.17.0"
+  },
+  "scripts": {
+    "watch-preventasorders": "cds watch --open preventasorders/index.html?sap-ui-xx-viewCache=false --livereload false"
+  },
+  "sapux": [
+    "app/preventasorders"
+  ]
+}

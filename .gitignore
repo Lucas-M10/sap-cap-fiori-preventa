@@ -1,0 +1,20 @@
+# Dependencias
+node_modules/
+
+# Variables de entorno y secretos
+.env
+.cdsrc-private.json
+
+# Base de datos SQLite local y temporales
+*.db
+*.db-shm
+*.db-wal
+
+# Build y empaquetado de CAP / UI5
+_out/
+dist/
+mta_archives/
+
+# Logs y caché
+*.log
+.DS_Store

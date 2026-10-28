@@ -1,22 +1,34 @@
-# Getting Started
+# Sistema de Preventas con SAP CAP y SAP Fiori Elements
 
-Welcome to your new CAP project.
+Aplicación transaccional desarrollada con **SAP Cloud Application Programming Model (CAP)** en Node.js y **SAP Fiori Elements**, diseñada para la captura y consulta de órdenes de preventa e integrada de forma *side-by-side* con APIs de SAP S/4HANA Sandbox.
 
-It contains these folders and files, following our recommended project layout:
+---
 
-File or Folder | Purpose
----------|----------
-`app/` | content for UI frontends goes here
-`db/` | your domain models and data go here
-`srv/` | your service models and code go here
-`readme.md` | this getting started guide
+## Características del Proyecto
 
-## Next Steps
+- **Backend OData V4:** Implementado sobre `@sap/cds` exponiendo entidades transaccionales (`Order`, `OrderItem`, etc.).
+- **Persistencia local:** Base de datos relacional basada en **SQLite** para desarrollo y pruebas.
+- **Frontend Fiori Elements:** Generado con plantilla *List Report / Object Page* consumiendo los servicios del catálogo local.
+- **Integración con SAP S/4HANA Cloud (Sandbox):** Consumo remoto de:
+  - `API_BUSINESS_PARTNER`: Consulta de datos maestros de clientes.
+  - `API_PRODUCT_SRV`: Consulta de catálogo y especificaciones de materiales/productos.
+- **Seguridad de credenciales:** Externalización de tokens y API keys vía variables de entorno (`.env`), evitando el almacenamiento de secretos en el control de versiones.
 
-- Open a new terminal and run `cds watch`
-- (in VS Code simply choose _**Terminal** > Run Task > cds watch_)
-- Start with your domain model, in a CDS file in `db/`
+---
 
-## Learn More
+## Estructura del Repositorio
 
-Learn more at <https://cap.cloud.sap>.
+```text
+├── app/
+│   ├── preventasorders/     # Aplicación SAP Fiori Elements (UI5)
+│   └── services.cds         # Referencias de anotaciones y servicios para UI
+├── db/
+│   └── schema.cds           # Definición del modelo de datos de persistencia
+├── srv/
+│   ├── service.cds          # Definición del servicio CatalogService (OData V4)
+│   ├── service.js           # Implementación de lógica de negocio y llamadas remotas
+│   └── external/            # Especificaciones importadas de S/4HANA (APIs externas)
+├── .env.example             # Plantilla para variables de entorno locales
+├── .gitignore               # Configuración de exclusión para Git
+├── package.json             # Dependencias, perfiles CDS y scripts de ejecución
+└── README.md
